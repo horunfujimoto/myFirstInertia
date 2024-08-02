@@ -1,4 +1,5 @@
 {
+    "type": "module",
     "private": true,
     "scripts": {
         "dev": "vite",
@@ -11,5 +12,8 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "vite": "^5.3.5"
+    },
+    "dependencies": {
+        "@inertiajs/vue3": "^1.2.0"
     }
 }

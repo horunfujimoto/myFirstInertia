@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Inertia\Inertia; // 修正
 
 class NewsController extends Controller
 {
@@ -44,8 +45,9 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show($id) // $id を引数として受け取る
     {
+        $news = News::findOrFail($id); // ID で記事を取得
         return Inertia::render('News/Show', [
             'news' => $news,
         ]);
