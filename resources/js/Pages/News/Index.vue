@@ -1,9 +1,19 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3'
 
 defineProps({
     news: Object,
 })
+
+const form = useForm({});
+const deleteNews = (news) => {
+    form.delete(route('news.destroy', news), {
+        preserveScroll: true,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+}
 </script>
 
 <template>
@@ -17,6 +27,9 @@ defineProps({
             </div>
             <div>
                 <Link :href="route('news.edit', n)">編集</Link>
+            </div>
+            <div>
+                <Link href="#" @click="deleteNews(n)">削除</Link>
             </div>
         </div>
     </div>
