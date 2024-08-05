@@ -7,6 +7,7 @@ defineProps({
 </script>
 
 <template>
+    <Link :href="route('news.create')">新規作成</Link>
     <div v-if="news">
         <div v-for="n in news">
             <h1>{{ n.title }}</h1>

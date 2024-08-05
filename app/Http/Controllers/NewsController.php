@@ -28,9 +28,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('News/Create', []);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -39,7 +39,14 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required'],
+            'body' => ['required'],
+        ]);
+
+        News::create($validated);
+
+        return redirect()->route('news.index');
     }
 
     /**
