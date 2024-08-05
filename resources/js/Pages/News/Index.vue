@@ -12,7 +12,12 @@ defineProps({
         <div v-for="n in news">
             <h1>{{ n.title }}</h1>
             <p>{{ n.body }}</p>
-            <Link :href="route('news.show', n)">詳細</Link>
+           <div>
+                <Link :href="route('news.show', n)">詳細</Link>
+            </div>
+            <div>
+                <Link :href="route('news.edit', n)">編集</Link>
+            </div>
         </div>
     </div>
 </template>

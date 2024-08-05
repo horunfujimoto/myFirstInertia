@@ -70,7 +70,9 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        return Inertia::render('News/Edit', [
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -82,7 +84,14 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        $validated = $request->validate([
+            'title' =>'required',
+            'body' => 'required',
+        ]);
+
+        $news->update($validated);
+
+        return redirect()->route('news.index');
     }
 
     /**
