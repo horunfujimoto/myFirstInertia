@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 
+URL::forceScheme('http');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,4 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/news/{id}', [NewsController::class, 'show']);
+// Route::get('/news/{id}', [NewsController::class, 'show']);
+Route::resource('news', NewsController::class)
+    ->except(['store', 'update']);
+Route::post('news/create', [NewsController::class, 'store'])
+    ->name('news.store');
+Route::put('news/{news}/edit', [NewsController::class, 'update'])
+    ->name('news.update');

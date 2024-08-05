@@ -1,19 +1,17 @@
-<template>
-    <div>
-        <div v-if="news">
-            <h1>{{ news.title }}</h1>
-            <p>{{ news.body }}</p>
-        </div>
-        <div v-else>
-            No news found
-        </div>
-    </div>
-</template>
+<script setup>
+import { Link } from '@inertiajs/vue3';
 
-<script>
-export default {
-    props: {
-        news: Object,
-    },
-};
+defineProps({
+    news: Object,
+})
 </script>
+
+<template>
+
+    <div>
+        <h1>{{ news.title }}</h1>
+        <p>{{ news.body }}</p>
+    </div>
+    <Link :href="route('news.index')">一覧に戻る</Link>
+
+</template>

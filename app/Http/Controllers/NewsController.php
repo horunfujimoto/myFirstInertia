@@ -15,7 +15,10 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::all();
+        return Inertia::render('News/Index', [
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -45,9 +48,8 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // $id を引数として受け取る
+    public function show(News $news)
     {
-        $news = News::findOrFail($id); // ID で記事を取得
         return Inertia::render('News/Show', [
             'news' => $news,
         ]);

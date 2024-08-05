@@ -21,6 +21,6 @@
         </style>
     </head>
     <body class="antialiased">
-        <a href="http://54.249.95.48:8010/news/1">いけ</a>
+        <a href="http://3.112.126.140:8010/news/1">いけ</a>
     </body>
 </html>

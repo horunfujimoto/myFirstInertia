@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import path from 'path';
 
 export default defineConfig({
     server: {
@@ -8,10 +9,15 @@ export default defineConfig({
         port: 3010,
         strictPort: true,
         hmr: {
-            host: '54.249.95.48',
+            host: '3.112.126.140',
         },
     },
     base: '/',
+    resolve: {
+        alias: {
+            'ziggy-js': path.resolve('vendor/tightenco/ziggy'),
+        }
+    },
     plugins: [
         vue(),
         laravel({
