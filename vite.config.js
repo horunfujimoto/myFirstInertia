@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import { quasar } from '@quasar/vite-plugin';
 import path from 'path';
 
 export default defineConfig({
@@ -9,7 +10,7 @@ export default defineConfig({
         port: 3010,
         strictPort: true,
         hmr: {
-            host: '3.112.126.140',
+            host: '18.179.14.183',
         },
     },
     base: '/',
@@ -23,6 +24,9 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
+        }),
+        quasar({
+            // sassVariables: 'resources/css/quasar-variables.sass'
         }),
     ],
 });

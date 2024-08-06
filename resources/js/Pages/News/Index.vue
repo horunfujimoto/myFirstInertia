@@ -1,5 +1,6 @@
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3'
+import { QBtn, QCard, QCardSection, QCardActions, QToolbar, QToolbarTitle, QLayout, QPage, QPageContainer } from 'quasar';
 
 defineProps({
     news: Object,
@@ -7,30 +8,42 @@ defineProps({
 
 const form = useForm({});
 const deleteNews = (news) => {
-    form.delete(route('news.destroy', news), {
-        preserveScroll: true,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    })
+    if (confirm('ニュースを削除しますか？')) {
+        form.delete(route('news.destroy', news), {
+            preserveScroll: true,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+    }
 }
 </script>
 
 <template>
-    <Link :href="route('news.create')">新規作成</Link>
-    <div v-if="news">
-        <div v-for="n in news">
-            <h1>{{ n.title }}</h1>
-            <p>{{ n.body }}</p>
-           <div>
-                <Link :href="route('news.show', n)">詳細</Link>
-            </div>
-            <div>
-                <Link :href="route('news.edit', n)">編集</Link>
-            </div>
-            <div>
-                <Link href="#" @click="deleteNews(n)">削除</Link>
-            </div>
-        </div>
-    </div>
+    <q-layout>
+        <q-page-container>
+            <q-page>
+                <q-toolbar>
+                    <q-toolbar-title>ニュース一覧</q-toolbar-title>
+                    <q-btn label="新規作成" color="primary" :href="route('news.create')" />
+                </q-toolbar>
+                <div v-if="news" class="q-pa-md">
+                    <div v-for="n in news" :key="n.id" class="q-mb-md">
+                        <q-card>
+                            <q-card-section>
+                                <div class="text-h6">{{ n.title }}</div>
+                                <p>{{ n.body }}</p>
+                            </q-card-section>
+                            <q-card-actions align="right">
+                                <q-btn flat label="詳細" :href="route('news.show', n)" />
+                                <q-btn flat label="編集" :href="route('news.edit', n)" />
+                                <q-btn flat label="削除" color="negative" @click="deleteNews(n)" />
+                            </q-card-actions>
+                        </q-card>
+                    </div>
+                </div>
+            </q-page>
+        </q-page-container>
+    </q-layout>
 </template>
+
